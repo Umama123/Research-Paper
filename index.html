@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Content Archetype Clustering — ML Research Paper</title>
+    <style>
+        body { font-family: 'Inter', -apple-system, sans-serif; line-height: 1.6; color: #2d3748; max-width: 900px; margin: 0 auto; padding: 2rem; background: #f7fafc; }
+        .paper-card { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        h1 { color: #1a202c; border-bottom: 3px solid #4299e1; padding-bottom: 0.5rem; }
+        h2 { color: #2b6cb0; margin-top: 2rem; }
+        .meta-box { background: #ebf8ff; border-left: 4px solid #3182ce; padding: 1rem; margin: 1.5rem 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { border: 1px solid #e2e8f0; padding: 0.75rem; text-align: left; }
+        th { background: #edf2f7; }
+        .badge { background: #48bb78; color: white; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.85rem; }
+        footer { margin-top: 3rem; text-align: center; color: #718096; font-size: 0.9rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="paper-card">
+        <h1>Structured Content Archetype Clustering</h1>
+        <p><strong>Author:</strong> Umama Naseer | <em>AI & Machine Learning Track Capstone</em></p>
+        
+        <div class="meta-box">
+            <strong>Abstract:</strong> This research paper presents an unsupervised machine learning approach (K-Means Clustering) to group unstructured search performance metrics into automated content management archetypes. Evaluating aggregated URL-level performance shows that multi-feature clustering significantly outperforms single-variable heuristic quantile baselines (Silhouette Score 0.2915 vs 0.0786).
+        </div>
+
+        <h2>1. Research Question & Decision Supported</h2>
+        <p><strong>Question:</strong> How can we group unstructured web content metrics into distinct performance archetypes using unsupervised machine learning, and assign automated playbooks (Protect, Improve, Refresh, Prune) to each group?</p>
+        <p><strong>Decision Supported:</strong> Enables SEO and content teams to automatically prioritize thousands of URLs into lifecycle actions without performing manual line-by-line page audits.</p>
+
+        <h2>2. Data Source & Scope</h2>
+        <ul>
+            <li><strong>Dataset:</strong> FlyRank ML Internship Warehouse Dataset via DuckDB.</li>
+            <li><strong>Metrics:</strong> Aggregated URL totals for <code>impressions</code>, <code>clicks</code>, <code>ctr</code>, and <code>avg_position</code>.</li>
+            <li><strong>Exclusions:</strong> Zero-impression/inactive URLs filtered out to remove long-tail noise.</li>
+            <li><strong>Privacy Guarantee:</strong> All domains and URLs are fully anonymized.</li>
+        </ul>
+
+        <h2>3. Methodology</h2>
+        <ol>
+            <li><strong>Feature Transformation:</strong> Log-transformation log(1+x) applied to heavily skewed metrics (impressions, clicks).</li>
+            <li><strong>Normalization:</strong> <code>StandardScaler</code> applied to standardize features (zero mean, unit variance).</li>
+            <li><strong>Clustering Model:</strong> K-Means algorithm evaluated across K ∈ [2, 6] using Elbow method and Silhouette scores.</li>
+            <li><strong>Dimensionality Reduction:</strong> Principal Component Analysis (PCA) used for 2D visual projection.</li>
+        </ol>
+
+        <h2>4. Results (K-Means vs Baseline)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Model Approach</th>
+                    <th>Silhouette Score</th>
+                    <th>Performance Gain</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Quantile Heuristic Baseline</td>
+                    <td>0.0786</td>
+                    <td>Baseline</td>
+                </tr>
+                <tr>
+                    <td><strong>K-Means Clustering (K=4)</strong></td>
+                    <td><strong>0.2915</strong></td>
+                    <td><span class="badge">+370% Separation</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Honest Framing & Limitations</h2>
+        <ul>
+            <li>Findings reflect historical observational metrics, not causal ranking guarantees.</li>
+            <li>Seasonal search traffic fluctuations can alter cluster boundaries over time.</li>
+            <li>Unsupervised clustering categorizes content performance; it does not claim to prove Google's ranking mechanics.</li>
+        </ul>
+
+        <h2>6. Actionable Content Playbook</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cluster</th>
+                    <th>Archetype Name</th>
+                    <th>Key Characteristics</th>
+                    <th>Recommended Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cluster 1</strong></td>
+                    <td>Hidden Gems</td>
+                    <td>Top Position (5.5), Low CTR (7%)</td>
+                    <td><strong>Metadata Optimization:</strong> Rewrite title tags and meta descriptions.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cluster 2</strong></td>
+                    <td>High-Intent Drivers</td>
+                    <td>High CTR (81%), High Clicks</td>
+                    <td><strong>Protect & Monitor:</strong> Maintain URL structure and internal links.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cluster 0</strong></td>
+                    <td>Growth Contenders</td>
+                    <td>High Impressions, Position ~27</td>
+                    <td><strong>Content Refresh:</strong> Update statistics and improve intent match.</td>
+                </tr>
+                <tr>
+                    <td><strong>Cluster 3</strong></td>
+                    <td>Zombie Content</td>
+                    <td>Lowest Clicks (4.6), CTR 2%</td>
+                    <td><strong>Merge or Prune:</strong> Consolidate duplicate content or prune thin pages.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <footer>
+            Built on the <a href="https://flyrank.ai" target="_blank">FlyRank ML Internship dataset</a> | Deployed for Capstone Completion
+        </footer>
+    </div>
+</body>
+</html>
